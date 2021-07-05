@@ -3,6 +3,13 @@
 <?= $this->section("body") ?>
 
 <div class="container" style="margin-top:20px;">
+<div>
+    <?php
+     if(isset($message)){
+         echo $message;
+     } 
+    ?>
+</div>
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-primary">

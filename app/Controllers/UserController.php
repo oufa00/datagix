@@ -75,6 +75,13 @@ class UserController extends BaseController
             ]);
 
         } else {
+            $model = new UserModel();
+            $user = $model->where('email', $this->request->getVar('email'))
+            ->first();
+            if($user){
+                $data = array("message" => "Email existe déja");
+                return view('layouts/register_compte',  $data);
+            }
             $new_user = new UserModel();
             $data = [
                 'name' => $this->request->getVar('name'),
@@ -84,7 +91,8 @@ class UserController extends BaseController
                 'password'=> password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
             ];
             $new_user->insert($data);
-            return view('login');
+            $data = array("message" => "Inscription avec success");
+            return view('login',$data);
         }
 
     }
